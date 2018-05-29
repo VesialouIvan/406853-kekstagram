@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Иван Веселов](https://up.htmlacademy.ru/javascript/14/user/406853).
-* Наставник: `Неизвестно`.
+* Наставник: [Павел Скрипкин](https://htmlacademy.ru/profile/id604273).
 
 ---
 
