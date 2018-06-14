@@ -9,7 +9,6 @@ var picturesList = document.querySelector('.pictures');
 // запишем массивы
 
 var PICTURE_SRCS = ['photos/1', 'photos/2', 'photos/3', 'photos/4', 'photos/5', 'photos/6', 'photos/7', 'photos/8', 'photos/9', 'photos/10', 'photos/11', 'photos/12', 'photos/13', 'photos/14', 'photos/15', 'photos/16', 'photos/17', 'photos/18', 'photos/19', 'photos/20', 'photos/21', 'photos/22', 'photos/23', 'photos/24', 'photos/25'];
-var PICTURE_LIKES = [];
 var PICTURE_COMMENTS = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 var PICTURE_DESCRIPTIONS = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'];
 var MIN = 15;
@@ -22,11 +21,6 @@ var getRandomNumber = function (min, max) {
   return random;
 };
 
-// Заполняем массив с лайками
-for (var i = 0; i < 25; i++) {
-  PICTURE_LIKES.push(getRandomNumber(MIN, MAX));
-}
-
 // получаем случайный элемент из каждого массива
 var getRandomElement = function (arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -36,7 +30,7 @@ var getRandomElement = function (arr) {
 var createRandomPost = function () {
   return {
     getRandomPostUrl: getRandomElement(PICTURE_SRCS),
-    getRandomPostLikes: getRandomElement(PICTURE_LIKES),
+    getRandomPostLikes: getRandomNumber(MIN, MAX),
     getRandomPostComments: getRandomElement(PICTURE_COMMENTS),
     getRandomPostDescription: getRandomElement(PICTURE_DESCRIPTIONS)
   };
