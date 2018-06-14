@@ -16,8 +16,8 @@ var MIN = 15;
 var MAX = 200;
 
 // функция, выдающая случайное число
-var getRandomNumber = function (MIN, MAX) {
-  var random = MIN + Math.random() * (MAX + 1 - MIN);
+var getRandomNumber = function (min, max) {
+  var random = min + Math.random() * (max + 1 - min);
   random = Math.floor(random);
   return random;
 };
@@ -53,7 +53,7 @@ var getRandomPosts = function (num) {
 
 // отобразить один пост
 var renderPost = function (post) {
-  var postElement = picture.cloneNode(true);
+  var postElement = photoTemplate.cloneNode(true);
   postElement.querySelector('picture__img').src = post.getRandomPostUrl;
   postElement.querySelector('.picture__stat--likes').textContent = post.getRandomPostLikes;
   postElement.querySelector('.picture__stat--comments').textContent = post.getRandomPostComments;
