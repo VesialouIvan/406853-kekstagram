@@ -16,14 +16,14 @@ var MAX = 200;
 // функция, выдающая случайное число
 var getRandomNumber = function (MIN, MAX) {
   var random = MIN + Math.random() * (MAX + 1 - MIN);
-  random = Math.floor(rand);
+  random = Math.floor(random);
   return random;
 };
 
 // Заполняем массив с лайками
 for (var i = 0; i < 25; i++) {
   PICTURE_LIKES.push(getRandomNumber(MIN, MAX));
-};
+}
 
 // получаем случайный элемент из каждого массива
 var getRandomElement = function (arr) {
@@ -51,11 +51,11 @@ var getRandomPosts = function (num) {
 
 // отобразить один пост
 var renderPost = function (post) {
-  var postElement = picture.cloneNode(true);
-postElement.querySelector('picture__img').src = post.getRandomPostUrl;
-postElement.querySelector('.picture__stat--likes').textContent = post.getRandomPostLikes;
-postElement.querySelector('.picture__stat--comments').textContent = post.getRandomPostComments;
-return postElement;
+  var postElement = pictures.cloneNode(true);
+  postElement.querySelector('picture__img').src = post.getRandomPostUrl;
+  postElement.querySelector('.picture__stat--likes').textContent = post.getRandomPostLikes;
+  postElement.querySelector('.picture__stat--comments').textContent = post.getRandomPostComments;
+  return postElement;
 };
 
 // отображаем посты
@@ -73,9 +73,3 @@ bigPicture.classList.remove('hidden');
 var posts = getRandomPosts(25);
 var fragment = document.createDocumentFragment();
 showPosts(fragment, posts);
-
-
-
-
-
-
