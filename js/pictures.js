@@ -1,3 +1,5 @@
+'use strict';
+
 var photoTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture__link');
