@@ -53,7 +53,7 @@ var getRandomPosts = function (num) {
 
 // отобразить один пост
 var renderPost = function (post) {
-  var postElement = pictures.cloneNode(true);
+  var postElement = picture.cloneNode(true);
   postElement.querySelector('picture__img').src = post.getRandomPostUrl;
   postElement.querySelector('.picture__stat--likes').textContent = post.getRandomPostLikes;
   postElement.querySelector('.picture__stat--comments').textContent = post.getRandomPostComments;
@@ -61,9 +61,9 @@ var renderPost = function (post) {
 };
 
 // отображаем посты
-var showPosts = function (parent, fragment, posts) {
-  for (var i = 0; i < posts.length; i++) {
-    fragment.appendChild(renderPost(posts[i]));
+var showPosts = function (parent, fragment, data) {
+  for (var i = 0; i < data.length; i++) {
+    fragment.appendChild(renderPost(data[i]));
   }
   parent.appendChild(fragment);
 };
@@ -72,6 +72,6 @@ var showPosts = function (parent, fragment, posts) {
 var bigPicture = document.querySelector('.big-picture');
 bigPicture.classList.remove('hidden');
 
-var posts = getRandomPosts(25);
-var fragment = document.createDocumentFragment();
-showPosts(fragment, posts);
+var allPosts = getRandomPosts(25);
+var postsFragment = document.createDocumentFragment();
+showPosts(picturesList, postsFragment, allPosts);
