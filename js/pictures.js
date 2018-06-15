@@ -7,8 +7,6 @@ var photoTemplate = document.querySelector('#picture')
 var picturesList = document.querySelector('.pictures');
 
 // запишем массивы
-
-var PICTURE_SRCS = ['photos/1.jpg', 'photos/2.jpg', 'photos/3.jpg', 'photos/4.jpg', 'photos/5.jpg', 'photos/6.jpg', 'photos/7.jpg', 'photos/8.jpg', 'photos/9.jpg', 'photos/10.jpg', 'photos/11.jpg', 'photos/12.jpg', 'photos/13.jpg', 'photos/14.jpg', 'photos/15.jpg', 'photos/16.jpg', 'photos/17.jpg', 'photos/18.jpg', 'photos/19.jpg', 'photos/20.jpg', 'photos/21.jpg', 'photos/22.jpg', 'photos/23.jpg', 'photos/24.jpg', 'photos/25.jpg'];
 var PICTURE_COMMENTS = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 var PICTURE_DESCRIPTIONS = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'];
 var MIN = 15;
@@ -27,7 +25,7 @@ var getRandomElement = function (arr) {
 };
 
 var getPhotoUrl = function (index) {
-  var postUrl = "photos/" + (index + 1) + ".jpg";
+  var postUrl = 'photos/' + (index + 1) + '.jpg';
   return postUrl;
 };
 
@@ -81,14 +79,14 @@ var createCommentTemplate = function (textMessage) {
   commentImg.classList.add('social__picture');
   commentText.classList.add('social__text');
 
-  commentImg.src = "img/avatar-" + getRandomNumber(1, 6) + ".svg";
+  commentImg.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
   commentText.textContent = textMessage;
 
   comment.appendChild(commentImg);
   comment.appendChild(commentText);
 
   return comment;
-}
+};
 
 // Заполним блок .big-picture данными из первого элемента сгенерированного массива
 var renderMainPost = function (mainPost) {
@@ -100,7 +98,6 @@ var renderMainPost = function (mainPost) {
   pictureSection.querySelector('.likes-count').textContent = mainPost.getRandomPostLikes;
   var comment = createCommentTemplate(mainPost.getRandomPostComments);
   commentsList.appendChild(comment);
- /* querySelector('.comments-count').textContent = mainPost.getRandomPostComments; */
 };
 
 var allPosts = getRandomPosts(25);
