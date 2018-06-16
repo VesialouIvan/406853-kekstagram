@@ -18,7 +18,7 @@ var photoTemplate = document.querySelector('#picture')
 var picturesList = document.querySelector('.pictures');
 
 // функция, выдающая случайное число
-var getRandomNumber = function (min_likes, max_likes) {
+var getRandomNumber = function (min_Likes, max_Likes) {
   var random = MIN_LIKES + Math.random() * (MAX_LIKES + 1 - MIN_LIKES);
   random = Math.floor(random);
   return random;
