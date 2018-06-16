@@ -2,12 +2,12 @@
 
 // запишем массивы
 var PICTURE_COMMENTS = ['Всё отлично!', 'В целом всё неплохо. Но не всё.',
- 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
- 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
- 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
- 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 var PICTURE_DESCRIPTIONS = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...',
- 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'];
+  'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'];
 var MIN_LIKES = 15;
 var MAX_LIKES = 200;
 var POSTS_COUNT = 25;
@@ -18,8 +18,8 @@ var photoTemplate = document.querySelector('#picture')
 var picturesList = document.querySelector('.pictures');
 
 // функция, выдающая случайное число
-var getRandomNumber = function (MIN_LIKES, MAX_LIKES) {
-  var random = MIN_LIKES + Math.random() * (MAX_LIKES + 1 - MIN_LIKES);
+var getRandomNumber = function (min_likes, max_likes) {
+  var random = min_likes + Math.random() * (max_likes + 1 - min_likes);
   random = Math.floor(random);
   return random;
 };
@@ -38,7 +38,7 @@ var getPhotoUrl = function (index) {
 var createRandomPost = function (index) {
   return {
     getRandomPostUrl: getPhotoUrl(index),
-    getRandomPostLikes: getRandomNumber(MIN_LIKES, MAX_LIKES),
+    getRandomPostLikes: getRandomNumber(min_likes, max_likes),
     getRandomPostComments: getRandomElement(PICTURE_COMMENTS),
     getRandomPostDescription: getRandomElement(PICTURE_DESCRIPTIONS)
   };
