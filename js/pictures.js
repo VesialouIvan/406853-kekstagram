@@ -18,8 +18,8 @@ var photoTemplate = document.querySelector('#picture')
 var picturesList = document.querySelector('.pictures');
 
 // функция, выдающая случайное число
-var getRandomNumber = function (min_likes, max_likes) {
-  var random = min_likes + Math.random() * (max_likes + 1 - min_likes);
+var getRandomNumber = function (MIN_LIKES, MAX_LIKES) {
+  var random = MIN_LIKES + Math.random() * (MAX_LIKES + 1 - MIN_LIKES);
   random = Math.floor(random);
   return random;
 };
@@ -38,7 +38,7 @@ var getPhotoUrl = function (index) {
 var createRandomPost = function (index) {
   return {
     getRandomPostUrl: getPhotoUrl(index),
-    getRandomPostLikes: getRandomNumber(min_likes, max_likes),
+    getRandomPostLikes: getRandomNumber(MIN_LIKES, MAX_LIKES),
     getRandomPostComments: getRandomElement(PICTURE_COMMENTS),
     getRandomPostDescription: getRandomElement(PICTURE_DESCRIPTIONS)
   };
