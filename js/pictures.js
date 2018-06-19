@@ -72,7 +72,7 @@ var showPosts = function (parent, fragment, data) {
 
 // удалим класс hidden у блока .big-picture
 var bigPicture = document.querySelector('.big-picture');
-bigPicture.classList.remove('hidden');
+
 
 var createCommentTemplate = function (textMessage) {
   var comment = document.createElement('li');
@@ -108,7 +108,60 @@ var renderMainPost = function (mainPost) {
 var allPosts = getRandomPosts(POSTS_COUNT);
 var postsFragment = document.createDocumentFragment();
 showPosts(picturesList, postsFragment, allPosts);
-renderMainPost(allPosts[0]);
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.social__loadmore').classList.add('visually-hidden');
+
+// отображаем
+var uploadField = document.querySelector('#upload-file');
+var imgEditor = document.querySelector('.img-upload__overlay');
+var cancelButton = document.querySelector('.img-upload__cancel');
+uploadField.addEventListener('click', function (event) {
+  event.preventDefault();
+  imgEditor.classList.remove('hidden');
+});
+
+cancelButton.addEventListener('click', function () {
+  imgEditor.classList.add('hidden');
+});
+
+var scalePin = document.querySelector('.scale__pin');
+var photoFilters = document.querySelectorAll('input[name=effect]');
+var uploadPhoto = document.querySelector('.img-upload__preview img');
+var effectsList = document.querySelector('.effects__list');
+
+// scalePin.addEventListener('mouseup', function () {
+
+// });
+
+// Для эффекта «Хром» — filter: grayscale(0..1);
+// Для эффекта «Сепия» — filter: sepia(0..1);
+// Для эффекта «Марвин» — filter: invert(0..100%);
+// Для эффекта «Фобос» — filter: blur(0..3px);
+// Для эффекта «Зной» — filter: brightness(1..3).
+
+effectsList.addEventListener('click', function (evt) {
+  uploadPhoto.removeAttribute('style');
+    var activeFilter = 'filter-' + evt.target.value;
+  console.log(activeFilter);
+  switch (activeFilter) {
+    case 'filter-chrome':
+      uploadPhoto.setAttribute('style', 'filter: grayscale(0.2);');
+      break;
+    case 'filter-sepia':
+      uploadPhoto.setAttribute('style', 'filter: sepia(0.2);');
+      break;
+    case 'filter-marvin':
+      uploadPhoto.setAttribute('style', 'filter: invert(20%);');
+      break;
+    case 'filter-phobos':
+      uploadPhoto.setAttribute('style', 'filter: blur(0.6px);');
+      break;
+    case 'filter-heat':
+      uploadPhoto.setAttribute('style', 'filter: brightness(1.4);');
+      break;
+    default:
+      console.log('style');
+  }
+});
+
