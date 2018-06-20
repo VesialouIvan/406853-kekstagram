@@ -127,8 +127,8 @@ cancelButton.addEventListener('click', function () {
 });
 
 
-var scalePin = document.querySelector('.scale__pin');
-var photoFilters = document.querySelectorAll('input[name=effect]');
+// var scalePin = document.querySelector('.scale__pin');
+// var = document.querySelectorAll('input[name=effect]');
 var uploadPhoto = document.querySelector('.img-upload__preview img');
 var effectsList = document.querySelector('.effects__list');
 
@@ -148,7 +148,7 @@ effectsList.addEventListener('click', function (evt) {
   var activeFilter = 'filter-' + evt.target.value;
 
   if (filters[activeFilter]) {
-    uploadPhoto.setAttribute('style', filters[activeFilter])
+    uploadPhoto.setAttribute('style', filters[activeFilter]);
   }
 });
 
@@ -161,11 +161,10 @@ picturesList.addEventListener('click', function (evt) {
     bigPicture.classList.remove('hidden');
     renderMainPost(allPosts[dataIndex]);
   }
-  console.log(dataIndex);
 });
 
 // по нажатию на крестик .big-picture__cancel закрываем блок с фото
 var pictureCancel = document.querySelector('.big-picture__cancel');
 pictureCancel.addEventListener('click', function () {
   bigPicture.classList.add('hidden');
-})
+});
