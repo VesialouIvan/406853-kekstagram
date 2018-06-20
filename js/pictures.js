@@ -54,9 +54,10 @@ var getRandomPosts = function (num) {
 };
 
 // отобразить один пост
-var renderPost = function (post) {
+var renderPost = function (post, index) {
   var postElement = photoTemplate.cloneNode(true);
   postElement.querySelector('.picture__img').src = post.getRandomPostUrl;
+  postElement.querySelector('.picture__img').dataset.index = index;
   postElement.querySelector('.picture__stat--likes').textContent = post.getRandomPostLikes;
   postElement.querySelector('.picture__stat--comments').textContent = post.getRandomPostComments;
   return postElement;
@@ -65,7 +66,7 @@ var renderPost = function (post) {
 // отображаем посты
 var showPosts = function (parent, fragment, data) {
   for (var i = 0; i < data.length; i++) {
-    fragment.appendChild(renderPost(data[i]));
+    fragment.appendChild(renderPost(data[i], i));
   }
   parent.appendChild(fragment);
 };
@@ -125,43 +126,46 @@ cancelButton.addEventListener('click', function () {
   imgEditor.classList.add('hidden');
 });
 
+
 var scalePin = document.querySelector('.scale__pin');
 var photoFilters = document.querySelectorAll('input[name=effect]');
 var uploadPhoto = document.querySelector('.img-upload__preview img');
 var effectsList = document.querySelector('.effects__list');
 
 // scalePin.addEventListener('mouseup', function () {
-
 // });
 
-// Для эффекта «Хром» — filter: grayscale(0..1);
-// Для эффекта «Сепия» — filter: sepia(0..1);
-// Для эффекта «Марвин» — filter: invert(0..100%);
-// Для эффекта «Фобос» — filter: blur(0..3px);
-// Для эффекта «Зной» — filter: brightness(1..3).
+var filters = {
+  'filter-chrome': 'filter:grayscale(0.2);',
+  'filter-sepia': 'filter:sepia(0.2);',
+  'filter-marvin': 'filter:invert(20%);',
+  'filter-phobos': 'filter:blur(0.6px);',
+  'filter-heat': 'filter:brightness(1.4);'
+};
 
 effectsList.addEventListener('click', function (evt) {
   uploadPhoto.removeAttribute('style');
-    var activeFilter = 'filter-' + evt.target.value;
-  console.log(activeFilter);
-  switch (activeFilter) {
-    case 'filter-chrome':
-      uploadPhoto.setAttribute('style', 'filter: grayscale(0.2);');
-      break;
-    case 'filter-sepia':
-      uploadPhoto.setAttribute('style', 'filter: sepia(0.2);');
-      break;
-    case 'filter-marvin':
-      uploadPhoto.setAttribute('style', 'filter: invert(20%);');
-      break;
-    case 'filter-phobos':
-      uploadPhoto.setAttribute('style', 'filter: blur(0.6px);');
-      break;
-    case 'filter-heat':
-      uploadPhoto.setAttribute('style', 'filter: brightness(1.4);');
-      break;
-    default:
-      console.log('style');
+  var activeFilter = 'filter-' + evt.target.value;
+
+  if (filters[activeFilter]) {
+    uploadPhoto.setAttribute('style', filters[activeFilter])
   }
 });
 
+// отображаем нужный пост по клику
+picturesList.addEventListener('click', function (evt) {
+  // находим индекс картинки(data-index), которую мы кликнули
+  if (evt.target.getAttribute('data-index')) {
+    var target = evt.target;
+    var dataIndex = target.getAttribute('data-index');
+    bigPicture.classList.remove('hidden');
+    renderMainPost(allPosts[dataIndex]);
+  }
+  console.log(dataIndex);
+});
+
+// по нажатию на крестик .big-picture__cancel закрываем блок с фото
+var pictureCancel = document.querySelector('.big-picture__cancel');
+pictureCancel.addEventListener('click', function () {
+  bigPicture.classList.add('hidden');
+})
