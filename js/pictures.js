@@ -117,8 +117,7 @@ document.querySelector('.social__loadmore').classList.add('visually-hidden');
 var uploadField = document.querySelector('#upload-file');
 var imgEditor = document.querySelector('.img-upload__overlay');
 var cancelButton = document.querySelector('.img-upload__cancel');
-uploadField.addEventListener('click', function (event) {
-  event.preventDefault();
+uploadField.addEventListener('change', function (event) {
   imgEditor.classList.remove('hidden');
 });
 
@@ -168,3 +167,69 @@ var pictureCancel = document.querySelector('.big-picture__cancel');
 pictureCancel.addEventListener('click', function () {
   bigPicture.classList.add('hidden');
 });
+
+// Хэш-теги
+
+var validationRules = [
+  {
+    validate: function (element) {
+      console.log(element.value[0]);
+      return element.value[0] === '#';
+    },
+    message: 'Хэш-тег должен начинаться с символа решетки'
+  },
+  {
+    validate: function (element) {
+      return element.value.validity.tooShort;
+    },
+    message: 'хеш-тег не может состоять только из одной решётки'
+  },
+  {
+    validate: function (element) {
+     var hashTags = element.value.split(' ');
+     var firstIndex;
+     var lastIndex;
+     for (var i = 0; i < hashTags.length; i++) {
+      firstIndex = hashTags[i].indexOf('#');
+      lastIndex = hashTags[i].lastIndexOf('#');
+      if (firstIndex !== lastIndex) {
+        return false;
+      }
+     }
+      return true;
+   },
+   message: 'хэш-теги разделяются пробелами'
+  },
+  // {
+    // не может 2 раза
+  // }
+  {
+  validate: function (element) {
+    return hashTags.length > 5 ? false : true;
+  },
+  message: 'нельзя указать больше пяти хэш-тегов'
+  },
+  {
+  validate: function (element) {
+    var hashTags = element.value.toLowerCase();
+  }
+}
+];
+
+var hashtagsInput = document.querySelector('.text__hashtags');
+hashtagsInput.addEventListener('input', function (evt) {
+  var target = evt.target;
+  for (var i = 0; i < validationRules.length; i++) {
+    var rule = validationRules[i].validate(target);
+    console.log(!rule);
+    if (!rule) {
+      var message = validationRules[i].message;
+      return target.setCustomValidity(message);
+    }
+  }
+  //hashtagsInput.setCustomValidity('');
+});
+
+
+
+
