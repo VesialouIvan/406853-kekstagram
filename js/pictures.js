@@ -173,7 +173,6 @@ pictureCancel.addEventListener('click', function () {
 var validationRules = [
   {
     validate: function (element) {
-      console.log(element.value[0]);
       return element.value[0] === '#';
     },
     message: 'Хэш-тег должен начинаться с символа решетки'
@@ -186,34 +185,34 @@ var validationRules = [
   },
   {
     validate: function (element) {
-     var hashTags = element.value.split(' ');
-     var firstIndex;
-     var lastIndex;
-     for (var i = 0; i < hashTags.length; i++) {
-      firstIndex = hashTags[i].indexOf('#');
-      lastIndex = hashTags[i].lastIndexOf('#');
-      if (firstIndex !== lastIndex) {
-        return false;
+      var hashTags = element.value.split(' ');
+      var firstIndex;
+      var lastIndex;
+      for (var i = 0; i < hashTags.length; i++) {
+       firstIndex = hashTags[i].indexOf('#');
+       lastIndex = hashTags[i].lastIndexOf('#');
+       if (firstIndex !== lastIndex) {
+         return false;
+       }
       }
-     }
-      return true;
-   },
-   message: 'хэш-теги разделяются пробелами'
+       return true;
+    },
+    message: 'хэш-теги разделяются пробелами'
   },
   // {
-    // не может 2 раза
+  // не может 2 раза
   // }
   {
-  validate: function (element) {
+    validate: function (element) {
     return hashTags.length > 5 ? false : true;
-  },
-  message: 'нельзя указать больше пяти хэш-тегов'
+    },
+    message: 'нельзя указать больше пяти хэш-тегов'
   },
   {
-  validate: function (element) {
-    var hashTags = element.value.toLowerCase();
+    validate: function (element) {
+      var hashTags = element.value.toLowerCase();
+    }
   }
-}
 ];
 
 var hashtagsInput = document.querySelector('.text__hashtags');
@@ -221,15 +220,10 @@ hashtagsInput.addEventListener('input', function (evt) {
   var target = evt.target;
   for (var i = 0; i < validationRules.length; i++) {
     var rule = validationRules[i].validate(target);
-    console.log(!rule);
     if (!rule) {
       var message = validationRules[i].message;
       return target.setCustomValidity(message);
     }
   }
-  //hashtagsInput.setCustomValidity('');
+  // hashtagsInput.setCustomValidity('');
 });
-
-
-
-
