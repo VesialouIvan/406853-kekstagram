@@ -189,13 +189,13 @@ var validationRules = [
       var firstIndex;
       var lastIndex;
       for (var i = 0; i < hashTags.length; i++) {
-       firstIndex = hashTags[i].indexOf('#');
-       lastIndex = hashTags[i].lastIndexOf('#');
-       if (firstIndex !== lastIndex) {
-         return false;
-       }
+        firstIndex = hashTags[i].indexOf('#');
+        lastIndex = hashTags[i].lastIndexOf('#');
+        if (firstIndex !== lastIndex) {
+          return false;
+        }
       }
-       return true;
+      return true;
     },
     message: 'хэш-теги разделяются пробелами'
   },
@@ -204,7 +204,7 @@ var validationRules = [
   // }
   {
     validate: function (element) {
-    return hashTags.length > 5 ? false : true;
+      return hashTags.length > 5 ? false : true;
     },
     message: 'нельзя указать больше пяти хэш-тегов'
   },
