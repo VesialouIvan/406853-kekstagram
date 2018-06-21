@@ -204,6 +204,7 @@ var validationRules = [
   // }
   {
     validate: function (element) {
+      var hashTags = element[i];
       return hashTags.length > 5 ? false : true;
     },
     message: 'нельзя указать больше пяти хэш-тегов'
