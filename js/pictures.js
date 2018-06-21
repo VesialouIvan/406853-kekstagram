@@ -54,9 +54,10 @@ var getRandomPosts = function (num) {
 };
 
 // отобразить один пост
-var renderPost = function (post) {
+var renderPost = function (post, index) {
   var postElement = photoTemplate.cloneNode(true);
   postElement.querySelector('.picture__img').src = post.getRandomPostUrl;
+  postElement.querySelector('.picture__img').dataset.index = index;
   postElement.querySelector('.picture__stat--likes').textContent = post.getRandomPostLikes;
   postElement.querySelector('.picture__stat--comments').textContent = post.getRandomPostComments;
   return postElement;
@@ -65,14 +66,14 @@ var renderPost = function (post) {
 // отображаем посты
 var showPosts = function (parent, fragment, data) {
   for (var i = 0; i < data.length; i++) {
-    fragment.appendChild(renderPost(data[i]));
+    fragment.appendChild(renderPost(data[i], i));
   }
   parent.appendChild(fragment);
 };
 
 // удалим класс hidden у блока .big-picture
 var bigPicture = document.querySelector('.big-picture');
-bigPicture.classList.remove('hidden');
+
 
 var createCommentTemplate = function (textMessage) {
   var comment = document.createElement('li');
@@ -108,7 +109,62 @@ var renderMainPost = function (mainPost) {
 var allPosts = getRandomPosts(POSTS_COUNT);
 var postsFragment = document.createDocumentFragment();
 showPosts(picturesList, postsFragment, allPosts);
-renderMainPost(allPosts[0]);
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.social__loadmore').classList.add('visually-hidden');
+
+// отображаем
+var uploadField = document.querySelector('#upload-file');
+var imgEditor = document.querySelector('.img-upload__overlay');
+var cancelButton = document.querySelector('.img-upload__cancel');
+uploadField.addEventListener('click', function (event) {
+  event.preventDefault();
+  imgEditor.classList.remove('hidden');
+});
+
+cancelButton.addEventListener('click', function () {
+  imgEditor.classList.add('hidden');
+});
+
+
+// var scalePin = document.querySelector('.scale__pin');
+// var = document.querySelectorAll('input[name=effect]');
+var uploadPhoto = document.querySelector('.img-upload__preview img');
+var effectsList = document.querySelector('.effects__list');
+
+// scalePin.addEventListener('mouseup', function () {
+// });
+
+var filters = {
+  'filter-chrome': 'filter:grayscale(0.2);',
+  'filter-sepia': 'filter:sepia(0.2);',
+  'filter-marvin': 'filter:invert(20%);',
+  'filter-phobos': 'filter:blur(0.6px);',
+  'filter-heat': 'filter:brightness(1.4);'
+};
+
+effectsList.addEventListener('click', function (evt) {
+  uploadPhoto.removeAttribute('style');
+  var activeFilter = 'filter-' + evt.target.value;
+
+  if (filters[activeFilter]) {
+    uploadPhoto.setAttribute('style', filters[activeFilter]);
+  }
+});
+
+// отображаем нужный пост по клику
+picturesList.addEventListener('click', function (evt) {
+  // находим индекс картинки(data-index), которую мы кликнули
+  if (evt.target.getAttribute('data-index')) {
+    var target = evt.target;
+    var dataIndex = target.getAttribute('data-index');
+    bigPicture.classList.remove('hidden');
+    renderMainPost(allPosts[dataIndex]);
+  }
+});
+
+// по нажатию на крестик .big-picture__cancel закрываем блок с фото
+var pictureCancel = document.querySelector('.big-picture__cancel');
+pictureCancel.addEventListener('click', function () {
+  bigPicture.classList.add('hidden');
+});
