@@ -230,5 +230,5 @@ hashtagsInput.addEventListener('input', function (evt) {
       return target.setCustomValidity(message);
     }
   }
-  hashtagsInput.setCustomValidity('');
+  return target.setCustomValidity('');
 });
