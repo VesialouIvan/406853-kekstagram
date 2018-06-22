@@ -179,19 +179,19 @@ var validationRules = [
   },
   {
     validate: function (element) {
-      return element.value.validity.tooShort;
+      return element.validity.tooShort ? false : true;
     },
     message: 'хеш-тег не может состоять только из одной решётки'
   },
   {
     validate: function (element) {
       var hashTags = element.value.split(' ');
-      var firstIndex;
-      var lastIndex;
+      var str;
+      var index;
       for (var i = 0; i < hashTags.length; i++) {
-        firstIndex = hashTags[i].indexOf('#');
-        lastIndex = hashTags[i].lastIndexOf('#');
-        if (firstIndex !== lastIndex) {
+        str = hashTags[i].substr(1);
+        index = str.indexOf('#');
+        if (index > -1) {
           return false;
         }
       }
@@ -201,9 +201,13 @@ var validationRules = [
   },
   {
     validate: function (element) {
-      var hashTags = element.value.filter(function (elem, pos, arr) {
-        return pos !== arr.indexOf(elem) || pos !== arr.lastIndexOf(elem);
+      var arr = element.value.split(' ');
+      var validateHashtag = arr.every(function (elem, pos, array) {
+        var check =  (pos === array.indexOf(elem)) && (pos === array.lastIndexOf(elem));
+        return check;
       });
+      return validateHashtag;
+      // ["hierro", "#oso", "#ruso", "#oso"]
     },
     message: 'один и тот же хэш-тег не может быть использован дважды'
   },
@@ -213,12 +217,12 @@ var validationRules = [
       return hashTags.length > 5 ? false : true;
     },
     message: 'нельзя указать больше пяти хэш-тегов'
-  },
-  {
-    validate: function (element) {
-      return element.value.toLowerCase();
-    }
   }
+  // {
+  //   validate: function (element) {
+  //     return element.value.toLowerCase();
+  //   }
+  //}
 ];
 
 var hashtagsInput = document.querySelector('.text__hashtags');
@@ -231,5 +235,5 @@ hashtagsInput.addEventListener('input', function (evt) {
       return target.setCustomValidity(message);
     }
   }
-  // hashtagsInput.setCustomValidity('');
+  hashtagsInput.setCustomValidity('');
 });
