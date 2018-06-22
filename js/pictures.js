@@ -199,12 +199,17 @@ var validationRules = [
     },
     message: 'хэш-теги разделяются пробелами'
   },
-  // {
-  // не может 2 раза
-  // }
   {
     validate: function (element) {
-      var hashTags = element[i];
+      var hashTags = element.value.filter(function (elem, pos, arr) {
+        return pos !== arr.indexOf(elem) || pos !== arr.lastIndexOf(elem);
+      });
+    },
+    message: 'один и тот же хэш-тег не может быть использован дважды'
+  },
+  {
+    validate: function (element) {
+      var hashTags = element.value.split(' ');
       return hashTags.length > 5 ? false : true;
     },
     message: 'нельзя указать больше пяти хэш-тегов'
