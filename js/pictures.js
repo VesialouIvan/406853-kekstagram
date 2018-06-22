@@ -117,7 +117,7 @@ document.querySelector('.social__loadmore').classList.add('visually-hidden');
 var uploadField = document.querySelector('#upload-file');
 var imgEditor = document.querySelector('.img-upload__overlay');
 var cancelButton = document.querySelector('.img-upload__cancel');
-uploadField.addEventListener('change', function (event) {
+uploadField.addEventListener('change', function () {
   imgEditor.classList.remove('hidden');
 });
 
@@ -203,7 +203,7 @@ var validationRules = [
     validate: function (element) {
       var arr = element.value.split(' ');
       var validateHashtag = arr.every(function (elem, pos, array) {
-        var check =  (pos === array.indexOf(elem)) && (pos === array.lastIndexOf(elem));
+        var check = (pos === array.indexOf(elem)) && (pos === array.lastIndexOf(elem));
         return check;
       });
       return validateHashtag;
@@ -218,11 +218,6 @@ var validationRules = [
     },
     message: 'нельзя указать больше пяти хэш-тегов'
   }
-  // {
-  //   validate: function (element) {
-  //     return element.value.toLowerCase();
-  //   }
-  //}
 ];
 
 var hashtagsInput = document.querySelector('.text__hashtags');
