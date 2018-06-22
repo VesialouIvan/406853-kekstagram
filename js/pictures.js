@@ -216,7 +216,7 @@ var validationRules = [
   },
   {
     validate: function (element) {
-      var hashTags = element.value.toLowerCase();
+      return element.value.toLowerCase();
     }
   }
 ];
