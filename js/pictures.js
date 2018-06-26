@@ -148,7 +148,7 @@ var filters = {
     return 'filter: blur(' + value / 100 + ')';
   },
   'filter-heat': function (value) {
-   return 'filter: brightness(' + value / 100 + ')';
+  return 'filter: brightness(' + value / 100 + ')';
   }
 };
 
@@ -277,7 +277,7 @@ slideEffect.addEventListener('mousedown', function (evt) {
     scaleLevel.style.width = Math.max(Math.min(slideEffect.offsetLeft - shift.x, 450), 0) + 'px';
     slideEffect.style.left = Math.max(Math.min(slideEffect.offsetLeft - shift.x, 450), 0) + 'px';
 
-    filterValue.value = Math.round(parseInt(slideEffect.style.left) / 450 * 100);
+    filterValue.value = Math.round(parseInt(slideEffect.style.left, '') / 450 * 100);
     uploadPhoto.setAttribute('style', filters[activeFilter](filterValue.value));
   };
 
@@ -288,14 +288,12 @@ slideEffect.addEventListener('mousedown', function (evt) {
     document.removeEventListener('mouseup', onMouseUp);
 
     if (dragged) {
-      var onClickPreventDefault = function (evt) {
-        evt.preventDefault();
+      var onClickPreventDefault = function (event) {
+        event.preventDefault();
         slideEffect.addEventListener('click', onClickPreventDefault);
-      }
-    };
-
+      };
+    }
   };
-
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 });
