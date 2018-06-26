@@ -135,20 +135,32 @@ var effectsList = document.querySelector('.effects__list');
 // });
 
 var filters = {
-  'filter-chrome': 'filter:grayscale(0.2);',
-  'filter-sepia': 'filter:sepia(0.2);',
-  'filter-marvin': 'filter:invert(20%);',
-  'filter-phobos': 'filter:blur(0.6px);',
-  'filter-heat': 'filter:brightness(1.4);'
+  'filter-chrome': function (value) {
+    return 'filter: grayscale(' + value / 100 + ')';
+  },
+  'filter-sepia': function (value) {
+    return 'filter: sepia(' + value / 100 + ')';
+  },
+  'filter-marvin': function (value) {
+    return 'filter: invert(' + value / 100 + ')';
+  },
+  'filter-phobos': function (value) {
+    return 'filter: blur(' + value / 100 + ')';
+  },
+  'filter-heat': function (value) {
+   return 'filter: brightness(' + value / 100 + ')';
+  }
 };
 
+var activeFilter;
 effectsList.addEventListener('click', function (evt) {
   uploadPhoto.removeAttribute('style');
-  var activeFilter = 'filter-' + evt.target.value;
+  activeFilter = 'filter-' + evt.target.value;
 
   if (filters[activeFilter]) {
-    uploadPhoto.setAttribute('style', filters[activeFilter]);
+    uploadPhoto.setAttribute('style', filters[activeFilter](filterValue.value));
   }
+  return activeFilter;
 });
 
 // отображаем нужный пост по клику
@@ -231,4 +243,59 @@ hashtagsInput.addEventListener('input', function (evt) {
     }
   }
   return target.setCustomValidity('');
+});
+
+// оживляем ползунок и насыщенность эффектов
+
+var scaleLine = document.querySelector('.scale__line');
+var scaleLevel = scaleLine.querySelector('.scale__level');
+var slideEffect = scaleLine.querySelector('.scale__pin');
+var filterValue = document.querySelector('.scale__value');
+
+slideEffect.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+
+  var startCoords = {
+    x: evt.clientX
+  };
+
+  var dragged = false;
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+    dragged = true;
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX
+    };
+
+    startCoords = {
+      x: moveEvt.clientX
+    };
+
+
+    scaleLevel.style.width = Math.max(Math.min(slideEffect.offsetLeft - shift.x, 450), 0) + 'px';
+    slideEffect.style.left = Math.max(Math.min(slideEffect.offsetLeft - shift.x, 450), 0) + 'px';
+
+    filterValue.value = Math.round(parseInt(slideEffect.style.left) / 450 * 100);
+    uploadPhoto.setAttribute('style', filters[activeFilter](filterValue.value));
+  };
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+
+    if (dragged) {
+      var onClickPreventDefault = function (evt) {
+        evt.preventDefault();
+        slideEffect.addEventListener('click', onClickPreventDefault);
+      }
+    };
+
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 });
