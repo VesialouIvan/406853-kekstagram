@@ -119,20 +119,16 @@ var imgEditor = document.querySelector('.img-upload__overlay');
 var cancelButton = document.querySelector('.img-upload__cancel');
 uploadField.addEventListener('change', function () {
   imgEditor.classList.remove('hidden');
+  // фото без фильтра при открытии
+  document.querySelector('.img-upload__scale').setAttribute('style', 'display: none;');
 });
 
 cancelButton.addEventListener('click', function () {
   imgEditor.classList.add('hidden');
 });
 
-
-// var scalePin = document.querySelector('.scale__pin');
-// var = document.querySelectorAll('input[name=effect]');
 var uploadPhoto = document.querySelector('.img-upload__preview img');
 var effectsList = document.querySelector('.effects__list');
-
-// scalePin.addEventListener('mouseup', function () {
-// });
 
 var filters = {
   'filter-chrome': function (value) {
@@ -142,13 +138,13 @@ var filters = {
     return 'filter: sepia(' + value / 100 + ')';
   },
   'filter-marvin': function (value) {
-    return 'filter: invert(' + value / 100 + ')';
+    return 'filter: invert(' + value + '%)';
   },
   'filter-phobos': function (value) {
-    return 'filter: blur(' + value / 100 + ')';
+    return 'filter: blur(' + value / 100 * 3 + 'px)';
   },
   'filter-heat': function (value) {
-    return 'filter: brightness(' + value / 100 + ')';
+    return 'filter: brightness(' + (value / 100 * 2 + 1) + ')';
   }
 };
 
@@ -158,7 +154,13 @@ effectsList.addEventListener('click', function (evt) {
   activeFilter = 'filter-' + evt.target.value;
 
   if (filters[activeFilter]) {
+    document.querySelector('.img-upload__scale').removeAttribute('style');
+    slideEffect.style.left = '0';
+    scaleLevel.style.width = '0';
+    filterValue.value = 0;
     uploadPhoto.setAttribute('style', filters[activeFilter](filterValue.value));
+  } else {
+    document.querySelector('.img-upload__scale').setAttribute('style', 'display: none;');
   }
   return activeFilter;
 });
@@ -219,7 +221,6 @@ var validationRules = [
         return check;
       });
       return validateHashtag;
-      // ["hierro", "#oso", "#ruso", "#oso"]
     },
     message: 'один и тот же хэш-тег не может быть использован дважды'
   },
