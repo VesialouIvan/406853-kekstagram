@@ -274,7 +274,6 @@ slideEffect.addEventListener('mousedown', function (evt) {
       x: moveEvt.clientX
     };
 
-
     scaleLevel.style.width = Math.max(Math.min(slideEffect.offsetLeft - shift.x, 450), 0) + 'px';
     slideEffect.style.left = Math.max(Math.min(slideEffect.offsetLeft - shift.x, 450), 0) + 'px';
 
