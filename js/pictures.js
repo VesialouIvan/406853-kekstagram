@@ -19,10 +19,6 @@ var showPosts = function (parent, fragment, data) {
   parent.appendChild(fragment);
 };
 
-window.pictures = {
-  showPosts: showPosts
-};
-
 var createCommentTemplate = function (textMessage) {
   var comment = document.createElement('li');
   var commentImg = document.createElement('img');
@@ -43,7 +39,7 @@ var createCommentTemplate = function (textMessage) {
 };
 
 window.pictures = {
+  showPosts: showPosts,
   createCommentTemplate: createCommentTemplate
 };
-
 })();
