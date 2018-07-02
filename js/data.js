@@ -27,7 +27,7 @@
 
   // получаем случайный элемент из каждого массива
   var getRandomElement = function (arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+    return arr[Math.floor(Math.random() * arr.length)];
   };
 
   var getPhotoUrl = function (index) {
@@ -61,4 +61,4 @@
     getRandomNumber: getRandomNumber,
     getRandomPosts: getRandomPosts
   };
-  })();
+})();
