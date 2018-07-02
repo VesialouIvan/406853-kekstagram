@@ -58,7 +58,7 @@
       var target = evt.target;
       var dataIndex = target.getAttribute('data-index');
       bigPicture.classList.remove('hidden');
-      window.preview.renderMainPost(allPosts[dataIndex]);
+      window.preview.renderMainPost(window.preview.allPosts[dataIndex]);
     }
   });
 

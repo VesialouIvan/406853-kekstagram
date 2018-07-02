@@ -35,6 +35,7 @@
   });
 
   window.preview = {
-    renderMainPost: renderMainPost
+    renderMainPost: renderMainPost,
+    allPosts: allPosts
   };
 })();
