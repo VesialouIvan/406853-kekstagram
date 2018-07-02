@@ -4,10 +4,10 @@
 // удалим класс hidden у блока .big-picture
   var bigPicture = document.querySelector('.big-picture');
 
-// по нажатию на крестик .big-picture__cancel закрываем блок с фото
+  // по нажатию на крестик .big-picture__cancel закрываем блок с фото
   var pictureCancel = document.querySelector('.big-picture__cancel');
-    pictureCancel.addEventListener('click', function () {
-      bigPicture.classList.add('hidden');
+  pictureCancel.addEventListener('click', function () {
+    bigPicture.classList.add('hidden');
   });
 
 
