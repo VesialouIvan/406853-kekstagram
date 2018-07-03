@@ -22,7 +22,6 @@
   var allPosts;
 
   var onLoad = function (data) {
-    console.log(data);
     var fragment = document.createDocumentFragment();
     window.pictures.showPosts(window.data.picturesList, fragment, data);
     allPosts = data;
