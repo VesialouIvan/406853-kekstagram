@@ -13,7 +13,7 @@
   var MAX_LIKES = 200;
   var POSTS_COUNT = 25;
   var picturesList = document.querySelector('.pictures');
-  // var userDialog = document.querySelector('.img-upload__wrapper');
+
   // функция, выдающая случайное число
   var getRandomNumber = function (min, max) {
     var random = min + Math.random() * (max + 1 - min);

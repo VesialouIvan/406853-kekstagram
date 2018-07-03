@@ -168,11 +168,12 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  var form = userDialog.querySelector('.img-upload__form');
+  var form = document.querySelector('.img-upload__form');
+  var imgEditor = document.querySelector('.img-upload__overlay');
 
   var onSuccess = function () {
     form.reset();
-    form.classList.add('hidden');
+    imgEditor.classList.add('hidden');
   };
 
   var onError = function (errorMessage) {
