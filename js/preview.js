@@ -45,8 +45,8 @@
   window.backend.load(onLoad, onError);
 
   // var allPosts = window.backend.load(onLoad, onError);
-  //var postsFragment = document.createDocumentFragment();
-  //window.pictures.showPosts(window.data.picturesList, postsFragment, allPosts);
+  // var postsFragment = document.createDocumentFragment();
+  // window.pictures.showPosts(window.data.picturesList, postsFragment, allPosts);
 
   document.querySelector('.social__comment-count').classList.add('visually-hidden');
   document.querySelector('.social__loadmore').classList.add('visually-hidden');
@@ -68,11 +68,11 @@
   // отображаем нужный пост по клику
   window.data.picturesList.addEventListener('click', function (evt) {
     // находим индекс картинки(data-index), которую мы кликнули
-      if (evt.target.getAttribute('data-index')) {
-        var target = evt.target;
-        var dataIndex = target.getAttribute('data-index');
-        bigPicture.classList.remove('hidden');
-        renderMainPost(allPosts[dataIndex]);
-      }
-    });
+    if (evt.target.getAttribute('data-index')) {
+      var target = evt.target;
+      var dataIndex = target.getAttribute('data-index');
+      bigPicture.classList.remove('hidden');
+      renderMainPost(allPosts[dataIndex]);
+    }
+  });
 })();

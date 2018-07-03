@@ -104,10 +104,8 @@
   ];
 
   var hashtagsInput = document.querySelector('.text__hashtags');
-  console.log(hashtagsInput.value);
   hashtagsInput.addEventListener('input', function (evt) {
     var target = evt.target;
-    console.log(target);
     for (var i = 0; i < validationRules.length; i++) {
       var rule = validationRules[i].validate(target);
       if (!rule) {
@@ -172,7 +170,7 @@
 
   var form = userDialog.querySelector('.img-upload__form');
 
-  var onSuccess = function() {
+  var onSuccess = function () {
     form.reset();
     form.classList.add('hidden');
   };
@@ -194,10 +192,8 @@
   form.addEventListener('submit', function (evt) {
     // Если валидно, то отправляем
     evt.preventDefault();
-    if(hashtagsInput.validity.valid) {
-      console.log(hashtagsInput.validity.valid);
+    if (hashtagsInput.validity.valid) {
       window.backend.save(onSuccess, onError, new FormData(form));
     }
   });
-
 })();
