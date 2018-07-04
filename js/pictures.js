@@ -2,12 +2,15 @@
 
 (function () {
 // отобразить один пост
+  var photoTemplate = document.querySelector('#picture')
+  .content
+  .querySelector('.picture__link');
   var renderPost = function (post, index) {
-    var postElement = window.data.photoTemplate.cloneNode(true);
-    postElement.querySelector('.picture__img').src = post.getRandomPostUrl;
+    var postElement = photoTemplate.cloneNode(true);
+    postElement.querySelector('.picture__img').src = post.url;
     postElement.querySelector('.picture__img').dataset.index = index;
-    postElement.querySelector('.picture__stat--likes').textContent = post.getRandomPostLikes;
-    postElement.querySelector('.picture__stat--comments').textContent = post.getRandomPostComments;
+    postElement.querySelector('.picture__stat--likes').textContent = post.likes;
+    postElement.querySelector('.picture__stat--comments').textContent = post.comments;
     return postElement;
   };
 

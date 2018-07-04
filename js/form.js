@@ -51,16 +51,6 @@
     return activeFilter;
   });
 
-  // отображаем нужный пост по клику
-  window.data.picturesList.addEventListener('click', function (evt) {
-  // находим индекс картинки(data-index), которую мы кликнули
-    if (evt.target.getAttribute('data-index')) {
-      var target = evt.target;
-      var dataIndex = target.getAttribute('data-index');
-      bigPicture.classList.remove('hidden');
-      window.preview.renderMainPost(window.preview.allPosts[dataIndex]);
-    }
-  });
 
   // Хэш-теги
 
@@ -176,5 +166,35 @@
     };
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
+  });
+
+  var form = document.querySelector('.img-upload__form');
+  var imgEditor = document.querySelector('.img-upload__overlay');
+
+  var onSuccess = function () {
+    form.reset();
+    imgEditor.classList.add('hidden');
+  };
+
+  var onError = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style.margin = 'auto';
+    node.style.textAlign = 'center';
+    node.style.backgroundColor = 'red';
+    node.style.position = 'relative';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+    node.style.color = 'white';
+    node.textContent = errorMessage;
+    document.querySelector('.img-upload__form').insertAdjacentElement('beforeend', node);
+  };
+
+  form.addEventListener('submit', function (evt) {
+    // Если валидно, то отправляем
+    evt.preventDefault();
+    if (hashtagsInput.validity.valid) {
+      window.backend.save(onSuccess, onError, new FormData(form));
+    }
   });
 })();

@@ -12,10 +12,6 @@
   var MIN_LIKES = 15;
   var MAX_LIKES = 200;
   var POSTS_COUNT = 25;
-
-  var photoTemplate = document.querySelector('#picture')
-    .content
-    .querySelector('.picture__link');
   var picturesList = document.querySelector('.pictures');
 
   // функция, выдающая случайное число
@@ -56,7 +52,6 @@
 
   window.data = {
     POSTS_COUNT: POSTS_COUNT,
-    photoTemplate: photoTemplate,
     picturesList: picturesList,
     getRandomNumber: getRandomNumber,
     getRandomPosts: getRandomPosts
