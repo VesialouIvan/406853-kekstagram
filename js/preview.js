@@ -129,4 +129,5 @@
       bigPicture.classList.remove('hidden');
       renderMainPost(allPosts[dataIndex]);
     };
+  };
 })();
