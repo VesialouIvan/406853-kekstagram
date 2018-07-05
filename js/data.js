@@ -11,7 +11,7 @@
     'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'];
   var MIN_LIKES = 15;
   var MAX_LIKES = 200;
-  var POSTS_COUNT = 25;
+  // var POSTS_COUNT = 25;
   var picturesList = document.querySelector('.pictures');
 
   // функция, выдающая случайное число
@@ -51,10 +51,10 @@
   };
 
   window.data = {
-    POSTS_COUNT: POSTS_COUNT,
+    // POSTS_COUNT: POSTS_COUNT,
     picturesList: picturesList,
     getRandomNumber: getRandomNumber,
-    getRandomPosts: getRandomPosts,
+    // getRandomPosts: getRandomPosts,
     getRandomElement: getRandomElement
   };
 })();

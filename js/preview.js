@@ -116,6 +116,11 @@
   cancelButton.addEventListener('click', function () {
     imgEditor.classList.add('hidden');
   });
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === 27) {
+      imgEditor.classList.add('hidden');
+    }
+  });
 
   // отображаем нужный пост по клику
   window.data.picturesList.addEventListener('click', function (evt) {
