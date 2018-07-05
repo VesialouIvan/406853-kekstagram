@@ -1,4 +1,5 @@
 'use strict';
+
 (function () {
 // Заполним блок .big-picture данными из первого элемента сгенерированного массива
   var DEBOUNCE_INTERVAL = 500;
@@ -16,7 +17,6 @@
       comment = window.pictures.createCommentTemplate(mainPost.comments[i]);
       fragment.appendChild(comment);
     }
-
     commentsList.appendChild(fragment);
   };
 
@@ -69,19 +69,16 @@
     var filterChecked = document.querySelector('.img-filters__button--active').id;
 
     if (filterChecked === 'filter-popular') {
-
       window.pictures.showPosts(allPosts);
+    }
     // фильтр новых фото
     if (filterChecked === 'filter-new') {
-
       var filterNewPosts = filterNew(allPosts);
       window.pictures.showPosts(filterNewPosts);
-
+    }
     // фильтр обсуждаемых фото
     if (filterChecked === 'filter-discussed') {
-
       var filteredPosts = filterPopular(allPosts);
-
       window.pictures.showPosts(filteredPosts);
     }
   };
@@ -129,4 +126,5 @@
       bigPicture.classList.remove('hidden');
       renderMainPost(allPosts[dataIndex]);
     }
+  });
 })();
