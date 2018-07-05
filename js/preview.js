@@ -29,7 +29,6 @@
     filters.classList.remove('img-filters--inactive');
   };
 
-
   var onError = function (errorMessage) {
     var node = document.createElement('div');
 
@@ -101,10 +100,7 @@
     }
     updatePhotosDebounce();
     // фильтр популярных фото
-
   });
-
-
   // var allPosts = window.backend.load(onLoad, onError);
   // var postsFragment = document.createDocumentFragment();
   // window.pictures.showPosts(window.data.picturesList, postsFragment, allPosts);
@@ -134,6 +130,5 @@
       var dataIndex = target.getAttribute('data-index');
       bigPicture.classList.remove('hidden');
       renderMainPost(allPosts[dataIndex]);
-    }
-  });
+    };
 })();
