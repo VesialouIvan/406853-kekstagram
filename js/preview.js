@@ -42,7 +42,6 @@
     node.textContent = errorMessage;
     document.querySelector('.pictures').insertAdjacentElement('afterend', node);
   };
-
   window.backend.load(onLoad, onError);
 
   var filtersForm = document.querySelector('.img-filters__form');
@@ -102,7 +101,6 @@
     // фильтр популярных фото
   });
   // var allPosts = window.backend.load(onLoad, onError);
-  // var postsFragment = document.createDocumentFragment();
   // window.pictures.showPosts(window.data.picturesList, postsFragment, allPosts);
 
   document.querySelector('.social__comment-count').classList.add('visually-hidden');
