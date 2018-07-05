@@ -52,7 +52,7 @@
   var filterPopular = function (arr) {
     return arr.filter(function (element) {
       return element.comments.length > 10;
-    })
+    });
   };
 
   // функция фильтрации по параметру новые
@@ -73,13 +73,12 @@
     if (filterChecked === 'filter-popular') {
 
       window.pictures.showPosts(allPosts);
-    };
     // фильтр новых фото
     if (filterChecked === 'filter-new') {
 
       var filterNewPosts = filterNew(allPosts);
       window.pictures.showPosts(filterNewPosts);
-    };
+
     // фильтр обсуждаемых фото
     if (filterChecked === 'filter-discussed') {
 
@@ -95,7 +94,6 @@
     document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
     var target = evt.target;
     var pictures = document.querySelector('.pictures');
-    console.log(evt.target.id);
     target.classList.add('img-filters__button--active');
 
     while (pictures.children.length !== 2) {

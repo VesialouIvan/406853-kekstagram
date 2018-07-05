@@ -2,7 +2,7 @@
 
 (function () {
   var pictures = document.querySelector('.pictures');
-// отобразить один пост
+  // отобразить один пост
   var photoTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture__link');
