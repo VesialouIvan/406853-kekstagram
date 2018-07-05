@@ -1,6 +1,7 @@
 'use strict';
 (function () {
 // Заполним блок .big-picture данными из первого элемента сгенерированного массива
+  var DEBOUNCE_INTERVAL = 500;
   var bigPicture = document.querySelector('.big-picture');
   var renderMainPost = function (mainPost) {
     var pictureSection = document.querySelector('.big-picture');
@@ -20,11 +21,12 @@
   };
 
   var allPosts;
+  var filters = document.querySelector('.img-filters');
 
   var onLoad = function (data) {
-    var fragment = document.createDocumentFragment();
-    window.pictures.showPosts(window.data.picturesList, fragment, data);
+    window.pictures.showPosts(data);
     allPosts = data;
+    filters.classList.remove('img-filters--inactive');
   };
 
 
@@ -43,6 +45,67 @@
   };
 
   window.backend.load(onLoad, onError);
+
+  var filtersForm = document.querySelector('.img-filters__form');
+
+  // функция фильтрации данных по параметру обсуждаемые
+  var filterPopular = function (arr) {
+    return arr.filter(function (element) {
+      return element.comments.length > 10;
+    })
+  };
+
+  // функция фильтрации по параметру новые
+  var filterNew = function (arr) {
+    var filteredArr = [];
+    while (filteredArr.length < 10) {
+      var elem = window.data.getRandomElement(arr);
+      if (filteredArr.indexOf(elem) === -1) {
+        filteredArr.push(elem);
+      }
+    }
+    return filteredArr;
+  };
+
+  var updatePhotos = function () {
+    var filterChecked = document.querySelector('.img-filters__button--active').id;
+
+    if (filterChecked === 'filter-popular') {
+
+      window.pictures.showPosts(allPosts);
+    };
+    // фильтр новых фото
+    if (filterChecked === 'filter-new') {
+
+      var filterNewPosts = filterNew(allPosts);
+      window.pictures.showPosts(filterNewPosts);
+    };
+    // фильтр обсуждаемых фото
+    if (filterChecked === 'filter-discussed') {
+
+      var filteredPosts = filterPopular(allPosts);
+
+      window.pictures.showPosts(filteredPosts);
+    }
+  };
+
+  var updatePhotosDebounce = window.debounce(updatePhotos, DEBOUNCE_INTERVAL);
+
+  filtersForm.addEventListener('click', function (evt) {
+    document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
+    var target = evt.target;
+    var pictures = document.querySelector('.pictures');
+    console.log(evt.target.id);
+    target.classList.add('img-filters__button--active');
+
+    while (pictures.children.length !== 2) {
+      pictures.removeChild(pictures.children[2]);
+    }
+    updatePhotosDebounce();
+    // фильтр популярных фото
+
+  });
+
 
   // var allPosts = window.backend.load(onLoad, onError);
   // var postsFragment = document.createDocumentFragment();

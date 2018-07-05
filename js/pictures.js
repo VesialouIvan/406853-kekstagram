@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var pictures = document.querySelector('.pictures');
 // отобразить один пост
   var photoTemplate = document.querySelector('#picture')
   .content
@@ -15,11 +16,12 @@
   };
 
   // отображаем посты
-  var showPosts = function (parent, fragment, data) {
-    for (var i = 0; i < data.length; i++) {
-      fragment.appendChild(renderPost(data[i], i));
+  var showPosts = function (array) {
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < array.length; i++) {
+      fragment.appendChild(renderPost(array[i], i));
     }
-    parent.appendChild(fragment);
+    pictures.appendChild(fragment);
   };
 
   var createCommentTemplate = function (textMessage) {

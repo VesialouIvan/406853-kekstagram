@@ -54,6 +54,7 @@
     POSTS_COUNT: POSTS_COUNT,
     picturesList: picturesList,
     getRandomNumber: getRandomNumber,
-    getRandomPosts: getRandomPosts
+    getRandomPosts: getRandomPosts,
+    getRandomElement: getRandomElement
   };
 })();
