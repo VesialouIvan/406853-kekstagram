@@ -42,13 +42,13 @@
   };
 
   // получаем 25 случайных постов
-  var getRandomPosts = function (num) {
-    var randomPosts = [];
-    for (var i = 0; i < num; i++) {
-      randomPosts.push(createRandomPost(i));
-    }
-    return randomPosts;
-  };
+  // var getRandomPosts = function (num) {
+  //   var randomPosts = [];
+  //   for (var i = 0; i < num; i++) {
+  //     randomPosts.push(createRandomPost(i));
+  //   }
+  //   return randomPosts;
+  // };
 
   window.data = {
     // POSTS_COUNT: POSTS_COUNT,

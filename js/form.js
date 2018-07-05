@@ -8,11 +8,11 @@
   var pictureCancel = document.querySelector('.big-picture__cancel');
   pictureCancel.addEventListener('click', function () {
     bigPicture.classList.add('hidden');
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === 27) {
-      bigPicture.classList.add('hidden');
-    }
-  })
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === 27) {
+        bigPicture.classList.add('hidden');
+      }
+    });
   });
 
 
