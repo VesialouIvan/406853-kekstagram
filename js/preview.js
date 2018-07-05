@@ -128,6 +128,5 @@
       var dataIndex = target.getAttribute('data-index');
       bigPicture.classList.remove('hidden');
       renderMainPost(allPosts[dataIndex]);
-    };
-  };
+    }
 })();
