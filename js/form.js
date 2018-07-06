@@ -1,23 +1,10 @@
 'use strict';
 
 (function () {
-// удалим класс hidden у блока .big-picture
-  var bigPicture = document.querySelector('.big-picture');
-
-  // по нажатию на крестик .big-picture__cancel закрываем блок с фото
-  var pictureCancel = document.querySelector('.big-picture__cancel');
-  pictureCancel.addEventListener('click', function () {
-    bigPicture.classList.add('hidden');
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 27) {
-        bigPicture.classList.add('hidden');
-      }
-    });
-  });
-
-
   // редактирование и фильтры
-
+  var RESIZE_STEP = 0.25;
+  var MIN_SCALE = 0.25;
+  var MAX_SCALE = 1;
   var uploadPhoto = document.querySelector('.img-upload__preview img');
   var effectsList = document.querySelector('.effects__list');
 
@@ -90,7 +77,7 @@
     },
     {
       validate: function (element) {
-        var arr = element.value.split(' ');
+        var arr = element.value.toLowerCase().split(' ');
         var validateHashtag = arr.every(function (elem, pos, array) {
           var check = (pos === array.indexOf(elem)) && (pos === array.lastIndexOf(elem));
           return check;
@@ -203,5 +190,26 @@
     if (hashtagsInput.validity.valid) {
       window.backend.save(onSuccess, onError, new FormData(form));
     }
+  });
+  // масшатбируем изображение
+  var resizeMinus = document.querySelector('.resize__control--minus');
+  var resizePlus = document.querySelector('.resize__control--plus');
+
+  resizeMinus.addEventListener('mousedown', function () {
+    var resizeControl = document.querySelector('.resize__control--value');
+    var newValue = parseInt(resizeControl.value) / 100 - RESIZE_STEP;
+    newValue = newValue < MIN_SCALE ? MIN_SCALE : newValue;
+    var scaleStyle = 'transform: scale(' + newValue + ')';
+    document.querySelector('.img-upload__preview').setAttribute('style', scaleStyle);
+    resizeControl.value = newValue * 100 + '%';
+  });
+
+  resizePlus.addEventListener('mousedown', function () {
+    var resizeControl = document.querySelector('.resize__control--value');
+    var newValue = parseInt(resizeControl.value) / 100 + RESIZE_STEP;
+    newValue = newValue > MAX_SCALE ? MAX_SCALE : newValue;
+    var scaleStyle = 'transform: scale(' + newValue + ')';
+    document.querySelector('.img-upload__preview').setAttribute('style', scaleStyle);
+    resizeControl.value = newValue * 100 + '%';
   });
 })();

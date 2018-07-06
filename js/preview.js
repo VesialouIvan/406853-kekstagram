@@ -3,7 +3,23 @@
 (function () {
 // Заполним блок .big-picture данными из первого элемента сгенерированного массива
   var DEBOUNCE_INTERVAL = 500;
+  var ESC_KEYCODE = 27;
   var bigPicture = document.querySelector('.big-picture');
+
+// удалим класс hidden у блока .big-picture
+  var bigPicture = document.querySelector('.big-picture');
+
+// по нажатию на крестик .big-picture__cancel закрываем блок с фото
+  var pictureCancel = document.querySelector('.big-picture__cancel');
+  pictureCancel.addEventListener('click', function () {
+    bigPicture.classList.add('hidden');
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        bigPicture.classList.add('hidden');
+      }
+    });
+  });
+
   var renderMainPost = function (mainPost) {
     var pictureSection = document.querySelector('.big-picture');
     var commentsList = pictureSection.querySelector('.social__comments');
@@ -109,15 +125,21 @@
   var cancelButton = document.querySelector('.img-upload__cancel');
   uploadField.addEventListener('change', function () {
     imgEditor.classList.remove('hidden');
-    // фото без фильтра при открытии
+    var resizeControl = document.querySelector('.resize__control--value');
+    resizeControl.value = '100%';
+    var scaleStyle = 'transform: scale(' + parseInt(resizeControl.value, 10) / 100 + ')';
+    document.querySelector('.img-upload__preview').setAttribute('style', scaleStyle);
+        // фото без фильтра при открытии
     document.querySelector('.img-upload__scale').setAttribute('style', 'display: none;');
   });
+
+
 
   cancelButton.addEventListener('click', function () {
     imgEditor.classList.add('hidden');
   });
   document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === 27) {
+    if (evt.keyCode === ESC_KEYCODE && !evt.target.classList.contains('text__hashtags') && !evt.target.classList.contains('text__description')) {
       imgEditor.classList.add('hidden');
     }
   });
