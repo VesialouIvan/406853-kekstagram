@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  // редактирование и фильтры
   var RESIZE_STEP = 0.25;
   var MIN_SCALE = 0.25;
   var MAX_SCALE = 1;
@@ -42,9 +41,6 @@
     }
     return activeFilter;
   });
-
-
-  // Хэш-теги
 
   var validationRules = [
     {
@@ -109,8 +105,6 @@
     hashtagsInput.removeAttribute('style');
     return target.setCustomValidity('');
   });
-
-  // оживляем ползунок и насыщенность эффектов
 
   var scaleLine = document.querySelector('.scale__line');
   var scaleLevel = scaleLine.querySelector('.scale__level');
@@ -185,19 +179,18 @@
   };
 
   form.addEventListener('submit', function (evt) {
-    // Если валидно, то отправляем
     evt.preventDefault();
     if (hashtagsInput.validity.valid) {
       window.backend.save(onSuccess, onError, new FormData(form));
     }
   });
-  // масшатбируем изображение
+
   var resizeMinus = document.querySelector('.resize__control--minus');
   var resizePlus = document.querySelector('.resize__control--plus');
 
   resizeMinus.addEventListener('mousedown', function () {
     var resizeControl = document.querySelector('.resize__control--value');
-    var newValue = parseInt(resizeControl.value) / 100 - RESIZE_STEP;
+    var newValue = parseInt(resizeControl.value, 10) / 100 - RESIZE_STEP;
     newValue = newValue < MIN_SCALE ? MIN_SCALE : newValue;
     var scaleStyle = 'transform: scale(' + newValue + ')';
     document.querySelector('.img-upload__preview').setAttribute('style', scaleStyle);
@@ -206,7 +199,7 @@
 
   resizePlus.addEventListener('mousedown', function () {
     var resizeControl = document.querySelector('.resize__control--value');
-    var newValue = parseInt(resizeControl.value) / 100 + RESIZE_STEP;
+    var newValue = parseInt(resizeControl.value, 10) / 100 + RESIZE_STEP;
     newValue = newValue > MAX_SCALE ? MAX_SCALE : newValue;
     var scaleStyle = 'transform: scale(' + newValue + ')';
     document.querySelector('.img-upload__preview').setAttribute('style', scaleStyle);

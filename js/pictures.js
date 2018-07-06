@@ -2,7 +2,6 @@
 
 (function () {
   var pictures = document.querySelector('.pictures');
-  // отобразить один пост
   var photoTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture__link');
@@ -15,7 +14,6 @@
     return postElement;
   };
 
-  // отображаем посты
   var showPosts = function (array) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < array.length; i++) {
@@ -29,7 +27,6 @@
     var commentImg = document.createElement('img');
     var commentText = document.createElement('p');
 
-    // добавляем нужные классы
     comment.classList.add('social__comment');
     commentImg.classList.add('social__picture');
     commentText.classList.add('social__text');

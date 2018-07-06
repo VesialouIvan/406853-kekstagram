@@ -1,15 +1,9 @@
 'use strict';
 
 (function () {
-// Заполним блок .big-picture данными из первого элемента сгенерированного массива
   var DEBOUNCE_INTERVAL = 500;
   var ESC_KEYCODE = 27;
   var bigPicture = document.querySelector('.big-picture');
-
-// удалим класс hidden у блока .big-picture
-  var bigPicture = document.querySelector('.big-picture');
-
-// по нажатию на крестик .big-picture__cancel закрываем блок с фото
   var pictureCancel = document.querySelector('.big-picture__cancel');
   pictureCancel.addEventListener('click', function () {
     bigPicture.classList.add('hidden');
@@ -62,14 +56,12 @@
 
   var filtersForm = document.querySelector('.img-filters__form');
 
-  // функция фильтрации данных по параметру обсуждаемые
   var filterPopular = function (arr) {
     return arr.filter(function (element) {
       return element.comments.length > 10;
     });
   };
 
-  // функция фильтрации по параметру новые
   var filterNew = function (arr) {
     var filteredArr = [];
     while (filteredArr.length < 10) {
@@ -87,12 +79,10 @@
     if (filterChecked === 'filter-popular') {
       window.pictures.showPosts(allPosts);
     }
-    // фильтр новых фото
     if (filterChecked === 'filter-new') {
       var filterNewPosts = filterNew(allPosts);
       window.pictures.showPosts(filterNewPosts);
     }
-    // фильтр обсуждаемых фото
     if (filterChecked === 'filter-discussed') {
       var filteredPosts = filterPopular(allPosts);
       window.pictures.showPosts(filteredPosts);
@@ -111,15 +101,11 @@
       pictures.removeChild(pictures.children[2]);
     }
     updatePhotosDebounce();
-    // фильтр популярных фото
   });
-  // var allPosts = window.backend.load(onLoad, onError);
-  // window.pictures.showPosts(window.data.picturesList, postsFragment, allPosts);
 
   document.querySelector('.social__comment-count').classList.add('visually-hidden');
   document.querySelector('.social__loadmore').classList.add('visually-hidden');
 
-  // отображаем
   var uploadField = document.querySelector('#upload-file');
   var imgEditor = document.querySelector('.img-upload__overlay');
   var cancelButton = document.querySelector('.img-upload__cancel');
@@ -129,11 +115,8 @@
     resizeControl.value = '100%';
     var scaleStyle = 'transform: scale(' + parseInt(resizeControl.value, 10) / 100 + ')';
     document.querySelector('.img-upload__preview').setAttribute('style', scaleStyle);
-        // фото без фильтра при открытии
     document.querySelector('.img-upload__scale').setAttribute('style', 'display: none;');
   });
-
-
 
   cancelButton.addEventListener('click', function () {
     imgEditor.classList.add('hidden');
@@ -144,9 +127,7 @@
     }
   });
 
-  // отображаем нужный пост по клику
   window.data.picturesList.addEventListener('click', function (evt) {
-    // находим индекс картинки(data-index), которую мы кликнули
     if (evt.target.getAttribute('data-index')) {
       var target = evt.target;
       var dataIndex = target.getAttribute('data-index');
