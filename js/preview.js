@@ -16,7 +16,6 @@
     var fragment = document.createDocumentFragment();
     var comment;
 
-    //очищаем список комментариев
     while (commentsList.children.length) {
       commentsList.removeChild(commentsList.children[0]);
     }
@@ -147,8 +146,7 @@
           document.removeEventListener('keydown', isEscapeExit);
         }
       };
-
-      document.addEventListener('keydown', isEscapeExit)
+      document.addEventListener('keydown', isEscapeExit);
     }
   });
 })();
