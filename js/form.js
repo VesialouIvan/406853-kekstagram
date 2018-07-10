@@ -4,7 +4,7 @@
   var RESIZE_STEP = 0.25;
   var MIN_SCALE = 0.25;
   var MAX_SCALE = 1;
-  var MAX_HASHTAG_LENGTH
+  var MAX_HASHTAG_LENGTH = 20;
   var uploadPhoto = document.querySelector('.img-upload__preview img');
   var effectsList = document.querySelector('.effects__list');
 
