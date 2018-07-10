@@ -140,8 +140,8 @@
       bigPicture.classList.remove('hidden');
       renderMainPost(allPosts[dataIndex]);
 
-      var isEscapeExit = function (event) {
-        if (event.keyCode === ESC_KEYCODE) {
+      var isEscapeExit = function (keydownEvt) {
+        if (keydownEvt.keyCode === ESC_KEYCODE) {
           bigPicture.classList.add('hidden');
           document.removeEventListener('keydown', isEscapeExit);
         }
