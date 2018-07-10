@@ -51,6 +51,18 @@
     },
     {
       validate: function (element) {
+        var hashTags = element.value.split(' ');
+        for (var i = 0; i < hashTags.length; i++) {
+          if (hashTags[i].length > 20) {
+            return false;
+          }
+        }
+        return true;
+      },
+      message: 'хэш-тег не может быть больше 20 символов'
+    },
+    {
+      validate: function (element) {
         return element.validity.tooShort ? false : true;
       },
       message: 'хеш-тег не может состоять только из одной решётки'
@@ -73,9 +85,9 @@
     },
     {
       validate: function (element) {
-        var arr = element.value.toLowerCase().split(' ');
-        var validateHashtag = arr.every(function (elem, pos, array) {
-          var check = (pos === array.indexOf(elem)) && (pos === array.lastIndexOf(elem));
+        var hashTags = element.value.toLowerCase().split(' ');
+        var validateHashtag = hashTags.every(function (hashTag, pos, array) {
+          var check = (pos === array.indexOf(hashTag)) && (pos === array.lastIndexOf(hashTag));
           return check;
         });
         return validateHashtag;
@@ -145,13 +157,8 @@
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
 
-      if (dragged) {
-        var onClickPreventDefault = function (event) {
-          event.preventDefault();
-          slideEffect.addEventListener('click', onClickPreventDefault);
-        };
-      }
     };
+
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });

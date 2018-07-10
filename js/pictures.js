@@ -10,7 +10,7 @@
     postElement.querySelector('.picture__img').src = post.url;
     postElement.querySelector('.picture__img').dataset.index = index;
     postElement.querySelector('.picture__stat--likes').textContent = post.likes;
-    postElement.querySelector('.picture__stat--comments').textContent = post.comments;
+    postElement.querySelector('.picture__stat--comments').textContent = post.comments.length;
     return postElement;
   };
 
