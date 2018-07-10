@@ -4,6 +4,7 @@
   var RESIZE_STEP = 0.25;
   var MIN_SCALE = 0.25;
   var MAX_SCALE = 1;
+  var MAX_HASHTAG_LENGTH
   var uploadPhoto = document.querySelector('.img-upload__preview img');
   var effectsList = document.querySelector('.effects__list');
 
@@ -53,7 +54,7 @@
       validate: function (element) {
         var hashTags = element.value.split(' ');
         for (var i = 0; i < hashTags.length; i++) {
-          if (hashTags[i].length > 20) {
+          if (hashTags[i].length > MAX_HASHTAG_LENGTH) {
             return false;
           }
         }
