@@ -130,9 +130,11 @@
       x: evt.clientX
     };
 
+    // var dragged = false;
+
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
-      dragged = true;
+      // dragged = true;
 
       var shift = {
         x: startCoords.x - moveEvt.clientX
