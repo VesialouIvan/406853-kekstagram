@@ -12,6 +12,12 @@
     document.removeEventListener('keydown', isEscapeExit);
   };
 
+  var isEscapeExit = function (keydownEvt) {
+    if (keydownEvt.keyCode === ESC_KEYCODE) {
+      closeMainPost();
+    }
+  };
+
   pictureCancel.addEventListener('click', function () {
     closeMainPost();
   });
@@ -140,12 +146,6 @@
       var dataIndex = target.getAttribute('data-index');
       bigPicture.classList.remove('hidden');
       renderMainPost(allPosts[dataIndex]);
-
-      var isEscapeExit = function (keydownEvt) {
-        if (keydownEvt.keyCode === ESC_KEYCODE) {
-          closeMainPost();
-        }
-      };
       document.addEventListener('keydown', isEscapeExit);
     }
   });
