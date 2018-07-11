@@ -9,8 +9,8 @@
     return random;
   };
 
-  var getRandomElement = function (arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+  var getRandomElement = function (array) {
+    return array[Math.floor(Math.random() * array.length)];
   };
 
   window.data = {
